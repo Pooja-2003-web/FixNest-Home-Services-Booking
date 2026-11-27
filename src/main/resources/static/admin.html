@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FixNest – Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0d17;--bg2:#12152a;--card:rgba(255,255,255,.05);--bd:rgba(255,255,255,.1);--tx:#f2f4ff;--mu:#9aa3c7;--a:#7c5cff;--b:#00d4ff;--c:#ff5ca8;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f5f6ff;--bg2:#e9ebff;--card:rgba(255,255,255,.8);--bd:rgba(20,20,60,.12);--tx:#14163a;--mu:#5a6088;color-scheme:light}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,.logo{font-family:Sora,system-ui,sans-serif}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;background:radial-gradient(var(--a),transparent 65%);opacity:.25;pointer-events:none;transform:translate(-50%,-50%);z-index:0;transition:left .25s,top .25s}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 5vw;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid var(--bd)}
+.logo{font-weight:800;font-size:1.4rem}.logo span{background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav .links{display:flex;gap:22px;align-items:center}nav a{color:var(--mu);text-decoration:none;font-size:.95rem}nav a:hover{color:var(--tx)}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+.btn{background:linear-gradient(135deg,var(--a),var(--b));color:#fff;padding:12px 26px;border-radius:99px;font-weight:600;box-shadow:0 8px 30px -8px var(--a);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 14px 36px -8px var(--b)}
+.btn.ghost{background:var(--card);border:1px solid var(--bd);box-shadow:none;color:var(--tx)}
+.ico{background:var(--card);border:1px solid var(--bd);width:40px;height:40px;border-radius:50%}
+section{position:relative;z-index:1;padding:90px 5vw}
+.hero{min-height:92vh;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;animation:float 12s ease-in-out infinite}
+.b1{width:380px;height:380px;background:var(--a);top:5%;left:-5%}.b2{width:320px;height:320px;background:var(--b);right:5%;top:20%;animation-delay:-4s}.b3{width:260px;height:260px;background:var(--c);bottom:0;left:40%;animation-delay:-8s}
+@keyframes float{50%{transform:translate(40px,-50px) scale(1.15)}}
+.hero>*:not(.blob){position:relative;z-index:1}
+.pill{display:inline-block;padding:6px 16px;border:1px solid var(--bd);background:var(--card);border-radius:99px;font-size:.85rem;color:var(--mu);margin-bottom:20px}
+h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.05;font-weight:800;letter-spacing:-.03em}
+.type{background:linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a));background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.type:after{content:"|";-webkit-text-fill-color:var(--b);animation:blink 1s steps(1) infinite}
+@keyframes shine{to{background-position:300%}}@keyframes blink{50%{opacity:0}}
+.hero p{color:var(--mu);max-width:520px;margin:22px 0 32px;font-size:1.1rem}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.visual{position:relative;height:420px}
+.fc{position:absolute;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--bd);border-radius:22px;padding:18px 22px;animation:bob 6s ease-in-out infinite;box-shadow:0 20px 50px -20px #000}
+.fc b{font-family:Sora;display:block;font-size:1.05rem}.fc small{color:var(--mu)}
+.scene{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 30px 40px rgba(124,92,255,.4));animation:bob 7s ease-in-out infinite}.fc{padding:12px 16px}.fc.c1{top:2%;left:0}.fc.c2{top:42%;right:-2%;animation-delay:-2s}.fc.c3{bottom:2%;left:4%;animation-delay:-4s}.fc .big{font-size:1.5rem}.orb{position:absolute;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--bd);animation:bob 5s ease-in-out infinite}.o1{top:6%;right:16%}.o2{top:56%;left:-2%;animation-delay:-1s}.o3{bottom:16%;right:8%;animation-delay:-2s}.o4{top:30%;left:16%;animation-delay:-3s}.win{animation:flick 3s ease-in-out infinite}@keyframes flick{50%{opacity:.75}}
+@keyframes bob{50%{transform:translateY(-18px) rotate(1.5deg)}}
+.marq{overflow:hidden;border-block:1px solid var(--bd);background:var(--bg2);padding:16px 0;position:relative;z-index:1}
+.track{display:flex;gap:56px;width:max-content;animation:scroll 28s linear infinite;font:800 1.5rem Sora}
+.track span{color:var(--mu);white-space:nowrap}.track span:nth-child(even){color:var(--tx)}
+.marq:hover .track{animation-play-state:paused}@keyframes scroll{to{transform:translateX(-50%)}}
+.head{text-align:center;max-width:620px;margin:0 auto 54px}.head h2{font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.02em}.head p{color:var(--mu);margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:24px;padding:28px;transition:transform .15s,border-color .3s;transform-style:preserve-3d;position:relative;overflow:hidden}
+.card:hover{border-color:var(--a)}
+.card:before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--x,50%) var(--y,0),rgba(124,92,255,.22),transparent 60%);opacity:0;transition:opacity .3s}.card:hover:before{opacity:1}
+.card .em{font-size:2.6rem;display:inline-block;animation:bob 5s ease-in-out infinite}
+.card h3{margin:12px 0 6px}.card p{color:var(--mu);font-size:.93rem;min-height:70px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:18px}.price{font:800 1.3rem Sora}.price small{font:400 .8rem Inter;color:var(--mu)}
+.steps .card{text-align:center}.steps .n{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--c));display:grid;place-items:center;margin:0 auto 12px;font:800 1.2rem Sora;color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;text-align:center}
+.stats b{font:800 clamp(2.2rem,5vw,3.4rem) Sora;background:linear-gradient(90deg,var(--b),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent;display:block}.stats span{color:var(--mu)}
+.rev{display:flex;gap:20px;width:max-content;animation:scroll 45s linear infinite}.rev .card{width:320px;flex:none}.rev p{min-height:0;color:var(--tx)}
+.rv{overflow:hidden;margin:0 -5vw}
+.track-box{max-width:560px;margin:auto;display:flex;gap:10px}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:14px;background:var(--bg2);border:1px solid var(--bd);color:var(--tx);font:inherit;margin-top:6px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+label{font-size:.85rem;color:var(--mu);display:block;margin-top:12px}
+.res{max-width:700px;margin:24px auto 0;display:grid;gap:10px}
+.bk{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--bd);padding:14px 18px;border-radius:16px;font-size:.92rem}
+.tag{padding:3px 12px;border-radius:99px;font-size:.78rem;font-weight:600;background:rgba(255,200,0,.15);color:#ffc83d}.tag.ok{background:rgba(0,220,130,.15);color:#2de3a0}.tag.bad{background:rgba(255,80,100,.15);color:#ff6b7d}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(5,6,15,.7);backdrop-filter:blur(8px);display:none;place-items:center;padding:16px}
+.modal.open{display:grid}
+.box{background:var(--bg2);border:1px solid var(--bd);border-radius:26px;padding:28px;width:min(520px,100%);max-height:90vh;overflow:auto;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+.box.wide{width:min(900px,100%)}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ok-ring{width:84px;height:84px;border-radius:50%;margin:10px auto;display:grid;place-items:center;font-size:2.6rem;background:rgba(0,220,130,.15);animation:pop .5s}
+.tbl{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}.tbl th,.tbl td{padding:8px;border-bottom:1px solid var(--bd);text-align:left}.tbl select,.tbl input{margin:0;padding:6px}
+.tabs{display:flex;gap:8px;margin:14px 0}.tabs button{padding:8px 18px;border-radius:99px;background:var(--card);border:1px solid var(--bd)}.tabs .on{background:var(--a);color:#fff}
+footer{position:relative;z-index:1;text-align:center;padding:40px 5vw;color:var(--mu);border-top:1px solid var(--bd)}
+#chatBtn{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:62px;height:62px;border-radius:50%;font-size:1.6rem;z-index:90;background:linear-gradient(135deg,var(--a),var(--c));color:#fff;box-shadow:0 0 0 0 var(--a);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 20px transparent}}
+#chat{position:fixed;right:20px;bottom:96px;width:min(360px,calc(100vw - 40px));height:480px;max-height:70vh;background:var(--bg2);border:1px solid var(--bd);border-radius:24px;z-index:90;display:none;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px -20px #000;animation:pop .3s}
+#chat.open{display:flex}
+.ch{padding:14px 18px;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;font:600 1rem Sora}.ch small{display:block;font:400 .75rem Inter;opacity:.9}
+#msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:85%;padding:10px 14px;border-radius:18px;font-size:.92rem;animation:pop .25s}.m.bot{background:var(--card);border:1px solid var(--bd);border-bottom-left-radius:4px}.m.me{align-self:flex-end;background:var(--a);color:#fff;border-bottom-right-radius:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 8px}.chips button{font-size:.78rem;padding:5px 12px;border-radius:99px;background:var(--card);border:1px solid var(--bd)}
+.cin{display:flex;gap:8px;padding:10px;border-top:1px solid var(--bd)}.cin input{margin:0}.cin button{width:44px;border-radius:12px;background:var(--a);color:#fff}
+.dots span{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--mu);animation:blink 1s infinite}.dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+.rvl{opacity:0;transform:translateY(40px) scale(.97);transition:all .8s cubic-bezier(.2,.8,.2,1)}.rvl.in{opacity:1;transform:none}
+#toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(120px);background:var(--tx);color:var(--bg);padding:12px 22px;border-radius:99px;z-index:200;transition:.4s;font-weight:600}#toast.show{transform:translateX(-50%)}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:50px}.visual{height:300px}nav .links a{display:none}.two{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rvl{opacity:1;transform:none}}
+
+main{max-width:1100px;margin:0 auto;padding:30px 5vw 60px}.panel{background:var(--bg2);border:1px solid var(--bd);border-radius:26px;padding:28px}
+</style></head><body>
+<nav><div class="logo">Fix<span>Nest</span> Admin</div></nav>
+<main><div class="panel" id="dash"></div></main><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const API=location.port==="8080"?"/api":"http://localhost:8080/api";
+let AUTH="",tab="b",AD={b:[],s:[],t:[]};
+try{AUTH=sessionStorage.getItem("fn_admin")||""}catch(e){}
+const rs=n=>"₹"+Number(n).toLocaleString("en-IN");
+const tc=s=>s?s[0]+s.slice(1).toLowerCase().replace("_"," "):"";
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const mapS=s=>({id:s.id,name:s.name,emoji:s.emoji||"🛠️",price:+s.price,desc:s.description||"",active:s.active?1:0});
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2400)}
+async function api(path,o={}){const r=await fetch(API+path,{method:o.method||"GET",headers:{"Content-Type":"application/json",Authorization:AUTH},body:o.body?JSON.stringify(o.body):undefined});
+if(!r.ok)throw new Error("Error "+r.status);return r.json().catch(()=>null)}
+async function loadAd(){try{const [b,s,t]=await Promise.all([api("/admin/bookings"),api("/admin/services"),api("/admin/support")]);
+AD.b=b.map(x=>({id:x.id,name:x.customer.name,phone:x.customer.phone,svc:x.service.name,date:x.bookingDate,time:x.timeSlot,pay:tc(x.payment.status),st:tc(x.status),amt:x.payment.status==="PAID"&&x.status!=="CANCELLED"?+x.amount:0}));
+AD.s=s.map(mapS);AD.t=t;return true}catch(e){return false}}
+function showLogin(msg){$("#dash").innerHTML=`<div style="max-width:420px;margin:30px auto"><h2>🛡️ Admin login</h2><p style="color:var(--mu)">Staff only.</p>
+<label>Username<input id="au" onkeydown="if(event.key==='Enter')adminLogin()"></label><label>Password<input id="ap" type="password" onkeydown="if(event.key==='Enter')adminLogin()"></label>
+<p style="color:#ff6b7d;font-size:.85rem">${msg||""}</p><div class="row"><a href="/" class="btn ghost" style="padding:10px 20px;text-decoration:none">← Website</a><button class="btn" onclick="adminLogin()">Login</button></div></div>`}
+async function adminLogin(){AUTH="Basic "+btoa($("#au").value.trim()+":"+$("#ap").value);
+if(await loadAd()){try{sessionStorage.setItem("fn_admin",AUTH)}catch(e){}admin()}else{AUTH="";showLogin("Wrong admin username or password.")}}
+function adminLogout(){AUTH="";try{sessionStorage.removeItem("fn_admin")}catch(e){}showLogin()}
+function admin(){const bk=AD.b.map(b=>`<tr><td>#${b.id}</td><td>${esc(b.name)}<br><small>${esc(b.phone)}</small></td><td>${esc(b.svc)}</td><td>${b.date}<br><small>${b.time}</small></td><td>${b.pay}</td><td><select onchange="setSt(${b.id},this.value)">${["Pending","Confirmed","Completed","Cancelled"].map(o=>`<option ${o===b.st?"selected":""}>${o}</option>`).join("")}</select></td></tr>`).join("")||"<tr><td colspan=6>No bookings yet.</td></tr>";
+const sv=AD.s.map(s=>`<tr><td>${s.emoji} ${esc(s.name)}</td><td><input type="number" value="${s.price}" onchange="setPr(${s.id},this.value)" style="width:100px"></td><td><button class="btn ghost" style="padding:5px 14px" title="${s.active?"Visible to customers. Click to hide it.":"Hidden from customers. Click to show it."}" onclick="togg(${s.id})">${s.active?"Show":"Hide"}</button> <button class="btn ghost" style="padding:5px 14px" onclick="delS(${s.id})">Delete</button></td></tr>`).join("");
+const sp=AD.t.map(t=>`<tr><td>#${t.id}</td><td>${esc(t.name)}<br><small>${esc(t.phone)}</small></td><td>${t.type==="AGENT"?"💬 Agent":"📞 Call back"}</td><td>${esc(t.preferredTime)}<br><small>${esc(t.message)}</small></td><td><select onchange="setTk(${t.id},this.value)">${["OPEN","IN_PROGRESS","RESOLVED"].map(o=>`<option value="${o}" ${o===t.status?"selected":""}>${tc(o)}</option>`).join("")}</select></td></tr>`).join("")||"<tr><td colspan=5>No support requests yet.</td></tr>";
+const rev=AD.b.reduce((a,b)=>a+b.amt,0),cust=new Set(AD.b.map(b=>b.phone)).size,open=AD.t.filter(t=>t.status!=="RESOLVED").length;
+$("#dash").innerHTML=`<div class="row" style="margin:0"><h2>🛡️ Admin dashboard</h2><span><a href="/" class="btn ghost" style="padding:8px 16px;text-decoration:none">← Website</a> <button class="btn" onclick="adminLogout()" style="padding:8px 16px">Logout</button></span></div>
+<div class="stats" style="margin:16px 0"><div><b>${AD.b.length}</b><span>Bookings</span></div><div><b>${cust}</b><span>Customers</span></div><div><b>${rs(rev)}</b><span>Revenue</span></div><div><b>${open}</b><span>Open requests</span></div></div>
+<div class="tabs"><button class="${tab==="b"?"on":""}" onclick="tab='b';admin()">Bookings</button><button class="${tab==="s"?"on":""}" onclick="tab='s';admin()">Services</button><button class="${tab==="t"?"on":""}" onclick="tab='t';admin()">Support</button></div>
+<div style="overflow-x:auto">${tab==="b"?`<table class="tbl"><tr><th>ID</th><th>Customer</th><th>Service</th><th>Slot</th><th>Payment</th><th>Status</th></tr>${bk}</table>`
+:tab==="t"?`<table class="tbl"><tr><th>ID</th><th>Customer</th><th>Type</th><th>Details</th><th>Status</th></tr>${sp}</table>`
+:`<table class="tbl"><tr><th>Service</th><th>Price</th><th>Actions</th></tr>${sv}</table><div class="two" style="margin-top:14px"><input id="ns" placeholder="New service name"><input id="np" type="number" placeholder="Price"></div><br><button class="btn" onclick="addS()">Add service</button>`}</div>`}
+async function refresh(){if(await loadAd())admin()}
+async function setSt(id,v){try{await api("/admin/bookings/"+id+"/status",{method:"PATCH",admin:1,body:{status:v.toUpperCase()}});toast("Status updated");await refresh()}catch(e){toast("Update failed")}}
+async function setTk(id,v){try{await api("/admin/support/"+id,{method:"PATCH",admin:1,body:{status:v}});toast("Request updated");await refresh()}catch(e){toast("Update failed")}}
+async function upd(id,fn){try{const s=AD.s.find(x=>x.id===id);fn(s);await api("/admin/services/"+id,{method:"PUT",admin:1,body:{name:s.name,emoji:s.emoji,description:s.desc,price:s.price,active:!!s.active}});await refresh()}catch(e){toast("Action failed")}}
+const setPr=(id,v)=>upd(id,s=>s.price=+v),togg=id=>upd(id,s=>s.active=s.active?0:1);
+async function delS(id){try{await api("/admin/services/"+id,{method:"DELETE",admin:1});await refresh()}catch(e){toast("Cannot delete a service that has bookings. Hide it instead.")}}
+async function addS(){const n=$("#ns").value.trim(),p=+$("#np").value;if(!n||!p)return toast("Enter name and price");
+try{await api("/admin/services",{method:"POST",admin:1,body:{name:n,emoji:"🛠️",description:"Professional service by verified experts.",price:p,active:true}});await refresh()}catch(e){toast("Could not add service")}}
+
+
+(async()=>{if(AUTH&&await loadAd())admin();else{AUTH="";showLogin()}})();
+</script></body></html>
