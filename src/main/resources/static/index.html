@@ -200,7 +200,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll(".rvl").forEach(e=>io.observe(e));
 
 // ---- FixNest live app (Java backend) ----
-const API=location.port==="8080"?"/api":"http://localhost:8080/api";
+const API=location.protocol==="file:"?"http://localhost:8080/api":"/api";
 let TOKEN="",ME=null,AUTH="",tab="b",AD={b:[],s:[],t:[]},BK=[],cur=null,LB=null,AFTER=null;
 try{TOKEN=localStorage.getItem("fn_t")||"";ME=JSON.parse(localStorage.getItem("fn_m")||"null")}catch(e){}
 const tc=s=>s?s[0]+s.slice(1).toLowerCase().replace("_"," "):"";

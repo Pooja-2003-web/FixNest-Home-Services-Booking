@@ -91,7 +91,7 @@ main{max-width:1100px;margin:0 auto;padding:30px 5vw 60px}.panel{background:var(
 <main><div class="panel" id="dash"></div></main><div id="toast"></div>
 <script>
 const $=s=>document.querySelector(s);
-const API=location.port==="8080"?"/api":"http://localhost:8080/api";
+const API=location.protocol==="file:"?"http://localhost:8080/api":"/api";
 let AUTH="",tab="b",AD={b:[],s:[],t:[]};
 try{AUTH=sessionStorage.getItem("fn_admin")||""}catch(e){}
 const rs=n=>"₹"+Number(n).toLocaleString("en-IN");
